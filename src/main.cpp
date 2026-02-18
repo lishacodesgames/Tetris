@@ -1,9 +1,10 @@
 #include "grid.h"
 #include <raylib.h>
+#include <iostream>
 
 int main() {
 
-   InitWindow(400, 800, "Raylib Template");
+   InitWindow(300, 600, "Tetris");
    SetTargetFPS(60);
 
    Grid grid;

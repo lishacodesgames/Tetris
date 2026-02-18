@@ -12,11 +12,7 @@ add_subdirectory(raylib)
 
 add_executable(${PROJECT_NAME}
    src/main.cpp
-   src/example_game.cpp
-)
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/.."
+   src/grid.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include )
