@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "Resources.h"
 #include <raylib.h>
 #include <vector>
 #include <unordered_map>
@@ -44,13 +45,13 @@ void Grid::Draw() {
 
    for (int col = 1; col < columns; col++) {
       start = {(float)(col * cellSize), 0};
-      end = {(float)(col * cellSize), 600};
+      end = {(float)(col * cellSize), GetScreenHeight()};
       DrawLineEx(start, end, 2, gridLines); 
    }
 
    for (int row = 1; row < rows; row++) { 
       start = {0, (float)(row * cellSize)};
-      end = {600, (float)(row * cellSize)};
+      end = {GetScreenWidth(), (float)(row * cellSize)};
       DrawLineEx(start, end, 2, gridLines);
    }
 }

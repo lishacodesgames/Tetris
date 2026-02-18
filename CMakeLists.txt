@@ -13,6 +13,7 @@ add_subdirectory(raylib)
 add_executable(${PROJECT_NAME}
    src/main.cpp
    src/grid.cpp
+   src/Resources.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include )

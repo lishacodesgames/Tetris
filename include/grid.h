@@ -28,9 +28,9 @@ class Grid {
    int rows, columns;
    int cellSize;
    GridColorValues colorValue;
-   std::array<std::array<CellState, 10>, 20> grid{};
    std::unordered_map<CellState, Color> cellColorMap;
 public:
+   std::array<std::array<CellState, 10>, 20> grid{};
    Grid();
    void Draw();
 };
