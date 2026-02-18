@@ -11,7 +11,8 @@ set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(raylib)
 
 add_executable(${PROJECT_NAME}
-   src/Block.cpp
+   src/Blocks.cpp
+   src/Colors.cpp
    src/Grid.cpp
    src/main.cpp
    src/Resources.cpp

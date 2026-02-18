@@ -1,5 +1,5 @@
 #pragma once
-#include "Grid.h"
+#include "Colors.h"
 #include <map>
 #include <vector>
 
@@ -19,4 +19,20 @@ public:
 
    Block();
    void Draw();
+};
+
+/// @relates Reference/NormRicky.jpg 
+class NormRicky : public Block { /// L block, 0 = sleeping on its back
+public:
+   NormRicky();
+};
+
+class AutRicky : public Block { /// J block, 0 = candy cane
+public:
+   AutRicky();
+};
+
+class Hero : public Block { // I block, 0 = 2nd col of 4x4
+public:
+   Hero();
 };
