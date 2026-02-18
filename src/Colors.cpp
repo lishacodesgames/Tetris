@@ -1,9 +1,8 @@
 #include "Colors.h"
-#include <raylib.h>
-#include <map>
 
-// cell-color map
-cellColorMap = {
+static GridColorValues colorValue;
+
+std::map<CellState, Color> cellColorMap = {
    {CellState::Empty, colorValue.Empty},
    {CellState::Hero, colorValue.Hero},
    {CellState::Teewee, colorValue.Teewee},

@@ -1,4 +1,5 @@
 #include "Blocks.h"
+#include "Colors.h"
 #include "Grid.h"
 
 Block::Block() {
@@ -7,7 +8,7 @@ Block::Block() {
 }
 
 void Block::Draw() {
-   std::vector<Position> block = cells[rotation];
+   std::vector<Position> block = this->cells[rotation];
 
    for(Position& cell : block) {
       DrawRectangle(block[0].col * cellSize + 1, block[0].row * cellSize + 1,
