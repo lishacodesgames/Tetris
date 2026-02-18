@@ -1,29 +1,22 @@
-#include "raylib.h"
-#include "example_game.hpp"
+#include "grid.h"
+#include <raylib.h>
 
 int main() {
-   // constexpr is a type of const that tells the compiler "this value is known at compile time"
-   constexpr int screenWidth = 800;
-   constexpr int screenHeight = 600;
 
-   InitWindow(screenWidth, screenHeight, "Raylib Template");
+   InitWindow(400, 800, "Raylib Template");
    SetTargetFPS(60);
 
-   Game game;
-   game.Init(); // normally, Init will contain some game variables that need to be initialised before game loop starts
+   Grid grid;
 
    while(!WindowShouldClose()) {
-      game.Update();
       BeginDrawing();
+      ClearBackground(BLUE);
 
-      ClearBackground(RAYWHITE);
-      game.Draw();
+      grid.Draw();
 
       EndDrawing();
    }
 
-   game.Shutdown();
    CloseWindow();
-
    return 0;
 }
