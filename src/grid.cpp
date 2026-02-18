@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "Grid.h"
 #include "Resources.h"
 #include <raylib.h>
 #include <vector>
@@ -45,13 +45,13 @@ void Grid::Draw() {
 
    for (int col = 1; col < columns; col++) {
       start = {(float)(col * cellSize), 0};
-      end = {(float)(col * cellSize), GetScreenHeight()};
+      end = {(float)(col * cellSize), (float)GetScreenHeight()};
       DrawLineEx(start, end, 2, gridLines); 
    }
 
    for (int row = 1; row < rows; row++) { 
       start = {0, (float)(row * cellSize)};
-      end = {GetScreenWidth(), (float)(row * cellSize)};
+      end = {(float)GetScreenWidth(), (float)(row * cellSize)};
       DrawLineEx(start, end, 2, gridLines);
    }
 }

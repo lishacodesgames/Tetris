@@ -1,4 +1,4 @@
-#include "grid.h"
+#include "Grid.h"
 #include "Resources.h"
 #include <raylib.h>
 #include <iostream>
