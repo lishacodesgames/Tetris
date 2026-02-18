@@ -3,8 +3,10 @@
 #include <iostream>
 
 int main() {
+   constexpr int screenWidth = 300; // note these numbers are called as magic numbers in Grid::Draw()
+   constexpr int screenHeight = 600; // if you change these, go and change those too
 
-   InitWindow(300, 600, "Tetris");
+   InitWindow(screenWidth, screenHeight, "Tetris");
    SetTargetFPS(60);
 
    Grid grid;

@@ -8,7 +8,7 @@
 Grid::Grid() {
    rows = 20;
    columns = 10;
-   cellSize = 40;
+   cellSize = 30;
 
    // all cells in grid = 0
    for(auto& row : grid) {
@@ -30,19 +30,27 @@ Grid::Grid() {
    };
 }
 
-void Grid::Print() {
-   for(const auto& row : grid) {
-      for(const CellState& cell : row) {
-         std::cout << static_cast<int>(cell) << " ";
-      }
-      std::cout << "\n";
-   }
-}
-
 void Grid::Draw() {
+   // permanently placed blocks
    for (int row = 0; row < rows; row++) {
       for (int col = 0; col < columns; col++) {
-         DrawRectangle(col * cellSize, row * cellSize, cellSize, cellSize, cellColorMap[grid[row][col]]);
+         DrawRectangle(col * cellSize, row * cellSize, cellSize, cellSize, cellColorMap[ grid.at(row).at(col) ]);
       }
+   }
+   
+   // cannot do in earlier loop, or the rectangles will draw over the lines
+   Vector2 start, end;
+   Color gridLines = ColorBrightness(colorValue.Empty, 0.04f);
+
+   for (int col = 1; col < columns; col++) {
+      start = {(float)(col * cellSize), 0};
+      end = {(float)(col * cellSize), 600};
+      DrawLineEx(start, end, 2, gridLines); 
+   }
+
+   for (int row = 1; row < rows; row++) { 
+      start = {0, (float)(row * cellSize)};
+      end = {600, (float)(row * cellSize)};
+      DrawLineEx(start, end, 2, gridLines);
    }
 }
