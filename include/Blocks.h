@@ -1,7 +1,6 @@
 #pragma once
 #include "Colors.h"
-#include "Grid.h"
-#include <map>
+#include <unordered_map>
 #include <vector>
 
 /// @brief 0deg position = position with most cells in North-East, then 90deg clockwise from there
@@ -16,24 +15,47 @@ public:
    CellType id;
 
    /// @brief tetromino's 4 cells -> occupy which 4 positions 
-   std::map<RotationState, std::array<Position, 4>> cells;
+   std::unordered_map<RotationState, std::array<Position, 4>> cells;
 
    Block();
    void Draw();
 };
 
-/// @relates Reference/NormRicky.jpg 
-class NormRicky : public Block { /// L block, 0 = sleeping on its back
+class Hero : public Block { /// I block, 0 = sleeping, 2nd row of 4x4
 public:
-   NormRicky();
+   Hero();
 };
 
+class Teewee : public Block { /// T block, 0 = upside-down T
+public:
+   Teewee();
+};
+
+class Smashboy : public Block { /// 2x2
+public:
+   Smashboy();
+};
+
+/// @relates Reference/Ricky.jpg 
+class Ricky : public Block { /// L block, 0 = sleeping on its back
+public:
+   Ricky();
+};
+
+/// @relates Reference/AutRicky.jpg
 class AutRicky : public Block { /// J block, 0 = candy cane
 public:
    AutRicky();
 };
 
-class Hero : public Block { // I block, 0 = 2nd col of 4x4
+class Snake : public Block { /// S block, 0 = S in upper part
 public:
-   Hero();
+   Snake();
 };
+
+class Znake : public Block { /// Z block, 0 = Z in upper part
+public:
+   Znake();
+};
+
+

@@ -11,6 +11,7 @@ void Game::Run() {
       Drawing draw;
       ClearBackground(ColorBrightness(cellColorMap[CellType::Empty], 0.04f)); // color of the gridlines
 
+      HandleEvents();
       Draw();
    }
 }

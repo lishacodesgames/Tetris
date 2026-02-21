@@ -4,7 +4,7 @@
 
 class Game {
    Grid grid;
-   NormRicky Lblock;
+   Ricky Lblock;
 
    void Draw();
    void HandleEvents();
@@ -12,4 +12,4 @@ public:
    Game() = default;
    void Init();
    void Run();
-}
+};

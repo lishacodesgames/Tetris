@@ -7,7 +7,7 @@ std::map<CellType, Color> cellColorMap = {
    {CellType::Hero, colorValue.Hero},
    {CellType::Teewee, colorValue.Teewee},
    {CellType::Smashboy, colorValue.Smashboy},
-   {CellType::NormRicky, colorValue.NormRicky},
+   {CellType::Ricky, colorValue.Ricky},
    {CellType::AutRicky, colorValue.AutRicky},
    {CellType::Snake, colorValue.Snake},
    {CellType::Znake, colorValue.Znake}
