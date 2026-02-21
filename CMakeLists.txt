@@ -13,6 +13,7 @@ add_subdirectory(raylib)
 add_executable(${PROJECT_NAME}
    src/Blocks.cpp
    src/Colors.cpp
+   src/Game.cpp
    src/Grid.cpp
    src/main.cpp
    src/Resources.cpp

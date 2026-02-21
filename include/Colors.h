@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <map>
 
-enum class CellState {
+enum class CellType {
    Empty,
    Hero, // I
    Teewee, // T
@@ -24,4 +24,4 @@ struct GridColorValues {
 };
 
 /// @brief cell-color map
-extern std::map<CellState, Color> cellColorMap;
+extern std::map<CellType, Color> cellColorMap;

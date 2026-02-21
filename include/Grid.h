@@ -9,7 +9,7 @@ class Grid {
    int cellSize;
    GridColorValues colorValue;
 public:
-   std::array<std::array<CellState, 10>, 20> grid{};
+   std::array<std::array<CellType, 10>, 20> grid{};
 
    Grid();
    void Draw();

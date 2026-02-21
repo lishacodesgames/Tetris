@@ -13,8 +13,8 @@ Grid::Grid() {
 
    // all cells in grid = 0
    for(auto& row : grid) {
-      for(CellState& cell : row) {
-         cell = CellState::Empty;
+      for(CellType& cell : row) {
+         cell = CellType::Empty;
       }
    }
 }

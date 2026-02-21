@@ -13,10 +13,10 @@ class Block {
    RotationState rotation;
 public:
    /// @brief type of block
-   CellState id;
+   CellType id;
 
    /// @brief tetromino's 4 cells -> occupy which 4 positions 
-   std::map<RotationState, std::vector<Position>> cells;
+   std::map<RotationState, std::array<Position, 4>> cells;
 
    Block();
    void Draw();

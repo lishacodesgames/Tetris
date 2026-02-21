@@ -2,13 +2,13 @@
 
 static GridColorValues colorValue;
 
-std::map<CellState, Color> cellColorMap = {
-   {CellState::Empty, colorValue.Empty},
-   {CellState::Hero, colorValue.Hero},
-   {CellState::Teewee, colorValue.Teewee},
-   {CellState::Smashboy, colorValue.Smashboy},
-   {CellState::NormRicky, colorValue.NormRicky},
-   {CellState::AutRicky, colorValue.AutRicky},
-   {CellState::Snake, colorValue.Snake},
-   {CellState::Znake, colorValue.Znake}
+std::map<CellType, Color> cellColorMap = {
+   {CellType::Empty, colorValue.Empty},
+   {CellType::Hero, colorValue.Hero},
+   {CellType::Teewee, colorValue.Teewee},
+   {CellType::Smashboy, colorValue.Smashboy},
+   {CellType::NormRicky, colorValue.NormRicky},
+   {CellType::AutRicky, colorValue.AutRicky},
+   {CellType::Snake, colorValue.Snake},
+   {CellType::Znake, colorValue.Znake}
 };
