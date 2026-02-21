@@ -14,6 +14,3 @@ public:
    Grid();
    void Draw();
 };
-
-/// @brief a cell's coodinate position rin our grid
-struct Position { int row, col; };

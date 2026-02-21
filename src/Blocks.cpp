@@ -1,5 +1,6 @@
 #include "Blocks.h"
 #include "Colors.h"
+#include "Position.h"
 
 Block::Block() {
    cellSize = 30;
