@@ -4,7 +4,7 @@
 
 class Game {
    Grid grid;
-   Ricky Lblock;
+   Znake block;
 
    void Draw();
    void HandleEvents();

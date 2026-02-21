@@ -1,8 +1,9 @@
 #include "Colors.h"
+#include <unordered_map>
 
 static GridColorValues colorValue;
 
-std::map<CellType, Color> cellColorMap = {
+std::unordered_map<CellType, Color> cellColorMap = {
    {CellType::Empty, colorValue.Empty},
    {CellType::Hero, colorValue.Hero},
    {CellType::Teewee, colorValue.Teewee},

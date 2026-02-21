@@ -16,7 +16,6 @@ add_executable(${PROJECT_NAME}
    src/Game.cpp
    src/Grid.cpp
    src/main.cpp
-   src/Resources.cpp
 )
 
 add_library(header_only_libs INTERFACE
