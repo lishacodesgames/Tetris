@@ -4,4 +4,8 @@
 struct Position { 
    int row;
    int col; 
+
+   Position operator+(const Position& other) {
+      return {row + other.row, col + other.col};
+   }
 };

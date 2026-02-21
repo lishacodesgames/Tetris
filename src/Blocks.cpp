@@ -1,15 +1,37 @@
 #include "Blocks.h"
 #include "Colors.h"
 #include "Position.h"
+#include <unordered_map>
+#include <algorithm>
 #include <array>
+#include <vector>
 
 Block::Block() {
    cellSize = 30;
    rotation = RotationState::Zero;
+   positionOffset = {0, 0};
+}
+
+std::array<Position, 4> Block::getBlockPosition() {
+   std::array<Position, 4> blockPosition = cells.at(rotation);
+   std::vector<Position> movedPositions{};
+
+   for(Position& currentCellPosition : blockPosition) {
+      movedPositions.push_back(currentCellPosition + positionOffset);
+   }
+
+   std::array<Position, 4> finalBlockPosition{};
+   std::copy(movedPositions.begin(), movedPositions.end(), finalBlockPosition.begin());
+
+   return finalBlockPosition;
+}
+
+void Block::Move(Position offset) {
+   positionOffset = offset;
 }
 
 void Block::Draw() {
-   std::array<Position, 4> block = this->cells.at(rotation);
+   std::array<Position, 4> block = getBlockPosition();
 
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);

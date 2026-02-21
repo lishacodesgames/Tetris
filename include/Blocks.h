@@ -11,14 +11,18 @@ enum class RotationState {Zero, Ninety, OneEighty, TwoSeventy};
 class Block {
    int cellSize;
    RotationState rotation;
+   Position positionOffset; /// each block has its own nxn grid. This attributes tells us the positionOffset of the top-left corner of that grid
+   
+   /// @brief moves each cell by given position offset
+   std::array<Position, 4> getBlockPosition();
 public:
-   /// @brief type of block
-   CellType id;
+   CellType id; /// type of block
 
    /// @brief tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells;
 
    Block();
+   void Move(Position offset);
    void Draw();
 };
 

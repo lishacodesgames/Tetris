@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Colors.h"
+#include "Position.h"
 #include <raylib.h>
 
 void Game::Init() {
@@ -20,7 +21,7 @@ void Game::Run() {
 }
 
 void Game::HandleEvents() {
-
+   block.Move({15, 6});
 }
 
 void Game::Draw() {
