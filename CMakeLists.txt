@@ -17,6 +17,13 @@ add_executable(${PROJECT_NAME}
    src/Grid.cpp
    src/main.cpp
 )
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang") # won't work for MSVC
+   target_compile_options(${PROJECT_NAME} PRIVATE
+      -Wall
+      -Wextra
+      -Wpedantic
+   )
+endif()
 
 add_library(header_only_libs INTERFACE
    include/Position.h

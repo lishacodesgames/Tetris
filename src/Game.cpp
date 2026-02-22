@@ -21,7 +21,7 @@ void Game::Run() {
 }
 
 void Game::HandleEvents() {
-   block.Move({15, 6});
+
 }
 
 void Game::Draw() {

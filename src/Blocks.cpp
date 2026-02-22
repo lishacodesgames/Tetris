@@ -9,7 +9,7 @@
 Block::Block() {
    cellSize = 30;
    rotation = RotationState::Zero;
-   positionOffset = {0, 0};
+   positionOffset = {0, 3}; // default spawn in the center, overridden but some
 }
 
 std::array<Position, 4> Block::getBlockPosition() {
@@ -50,6 +50,7 @@ Hero::Hero() {
    cells[RotationState::Ninety] = {{ {0, 2}, {1, 2}, {2, 2}, {3, 2} }};
    cells[RotationState::OneEighty] = {{ {2, 0}, {2, 1}, {2, 2}, {2, 3} }};
    cells[RotationState::TwoSeventy] = {{ {0, 1}, {1, 1}, {2, 1}, {3, 1} }};
+   positionOffset = {-1, 3};
 }
 
 Teewee::Teewee() {
@@ -61,8 +62,9 @@ Teewee::Teewee() {
 }
 
 Smashboy::Smashboy() {
-   id == CellType::Smashboy;
+   id = CellType::Smashboy;
    cells[RotationState::Zero] = {{ {0, 0}, {0, 1}, {1, 0}, {1, 1} }};
+   positionOffset = {0, 4};
 }
 
 Ricky::Ricky() {

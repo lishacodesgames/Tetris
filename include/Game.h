@@ -1,10 +1,11 @@
 #pragma once
 #include "Blocks.h"
 #include "Grid.h"
+#include <vector>
 
 class Game {
    Grid grid;
-   Znake block;
+   std::array<Block, 7> blocks{};
 
    void Draw();
    void HandleEvents();
