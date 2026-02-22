@@ -25,6 +25,10 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang") # won't work for MSVC
    )
 endif()
 
+target_precompile_headers(${PROJECT_NAME} PRIVATE
+   ${PROJECT_SOURCE_DIR}/include/Precompiled.h
+)
+
 add_library(header_only_libs INTERFACE
    include/Position.h
 )

@@ -1,10 +1,8 @@
-#include "Grid.h"
-#include "Colors.h"
+#include <Precompiled.h>
 #include <raylib.h>
 #include <vector>
-#include <map>
-
-#include <iostream> // for testing TODO remove later
+#include "Grid.h"
+#include "Colors.h"
 
 Grid::Grid() {
    rows = 20;

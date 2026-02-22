@@ -1,7 +1,8 @@
+#include <Precompiled.h>
+#include <raylib.h>
 #include "Game.h"
 #include "Colors.h"
 #include "Position.h"
-#include <raylib.h>
 
 void Game::Init() {
    InitWindow(300, 600, "Tetris");

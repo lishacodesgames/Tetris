@@ -1,10 +1,11 @@
-#include "Blocks.h"
-#include "Colors.h"
-#include "Position.h"
+#include <Precompiled.h>
 #include <unordered_map>
 #include <algorithm>
 #include <array>
 #include <vector>
+#include "Blocks.h"
+#include "Colors.h"
+#include "Position.h"
 
 Block::Block() {
    cellSize = 30;
