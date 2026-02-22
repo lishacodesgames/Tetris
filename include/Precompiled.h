@@ -6,5 +6,9 @@
 // ---- RAYLIB ----
 #include <raylib.h>
 
+// ---- RANDOM ----
+#include <random>
+#include <ctime>
+
 // ---- ALGORITHM ----
 #include <algorithm>
