@@ -16,9 +16,6 @@ protected:
     */
    Position p_positionOffset = {0, 3}; // overwritten by some child classes 
    CellType p_id = CellType::Empty; /// type of block
-
-   /// Origin + offset = current position
-   std::array<Position, 4> p_getBlockPosition();
    
 public:
 // -------------- PUBLIC --------------
@@ -30,6 +27,7 @@ public:
    /// Tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells{};
 
+   void applyGravity();
    void Move(Position offset);
    void Rotate(); /// Rotations block clockwise
    void Draw();
@@ -38,6 +36,8 @@ private:
    RotationState m_rotation = RotationState::Zero;
    Grid m_grid;
 
+   /// Origin + offset = current position
+   std::array<Position, 4> m_getBlockPosition();
    void m_considerBounds();
 };
 

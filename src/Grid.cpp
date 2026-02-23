@@ -18,14 +18,12 @@ void Grid::Draw() {
 }
 
 Grid::OutOfBounds Grid::checkBounds(const Position& cell) {
-   if(cell.row < 0)
-      return OutOfBounds::Top;
-   else if(cell.col >= m_columns)
+   if(cell.col >= m_columns)
       return OutOfBounds::Right;
    else if(cell.row >= m_rows)
       return OutOfBounds::Bottom;
    else if(cell.col < 0)
       return OutOfBounds::Left;
-   else 
+   else
       return OutOfBounds::Inside;
 }

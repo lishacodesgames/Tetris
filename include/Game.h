@@ -6,7 +6,6 @@
 class Game {
    Grid grid;
    std::vector<Block> blocks{};
-   
    Block currentBlock;
    Block nextBlock;
 
@@ -20,6 +19,8 @@ class Game {
    void HandleEvents();
    void Draw();
    
+   float secondsElapsed = 0.0f; // time elapsed since last tick-event
+   bool hasTimeElapsed(float dt, float gravityInterval);
 public:
    Game() = default;
    void Init();

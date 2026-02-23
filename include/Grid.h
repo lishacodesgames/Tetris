@@ -12,7 +12,7 @@ public:
    std::array<std::array<CellType, 10>, 20> grid{};
    int cellSize = 30;
 
-   enum class OutOfBounds { Inside, Top, Right, Bottom, Left };
+   enum class OutOfBounds { Inside, Right, Bottom, Left };
    OutOfBounds checkBounds(const Position& cell);
 
    void Draw();

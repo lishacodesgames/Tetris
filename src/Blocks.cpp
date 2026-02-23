@@ -11,6 +11,10 @@ Block::RotationState& operator++(Block::RotationState& r) {
    return r;
 }
 
+void Block::applyGravity() {
+   Move({1, 0});
+}
+
 void Block::Move(Position offset) {
    p_positionOffset += offset;
    m_considerBounds();
@@ -24,7 +28,7 @@ void Block::Rotate() {
 }
 
 void Block::Draw() {
-   std::array<Position, 4> block = p_getBlockPosition();
+   std::array<Position, 4> block = m_getBlockPosition();
    
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);
@@ -35,7 +39,7 @@ void Block::Draw() {
    }
 }
 
-std::array<Position, 4> Block::p_getBlockPosition() {
+std::array<Position, 4> Block::m_getBlockPosition() {
    std::array<Position, 4> blockPosition = cells.at(m_rotation); // origin position
 
    for(Position& cell : blockPosition) {
@@ -47,23 +51,20 @@ std::array<Position, 4> Block::p_getBlockPosition() {
 
 void Block::m_considerBounds() {
    Grid::OutOfBounds bounds;
-   for(const Position& cell : p_getBlockPosition()) {
+   for(const Position& cell : m_getBlockPosition()) {
       bounds = m_grid.checkBounds(cell);
 
       switch(bounds) {
-         case Grid::OutOfBounds::Top:
-            p_positionOffset += {1, 0}; 
-            break;
+         case Grid::OutOfBounds::Inside: break;
          case Grid::OutOfBounds::Right:
             p_positionOffset += {0, -1}; 
-            break;
+            return;
          case Grid::OutOfBounds::Bottom:
             p_positionOffset += {-1, 0};
-            break;
+            return;
          case Grid::OutOfBounds::Left:
             p_positionOffset += {0, 1};
-            break;
-         case Grid::OutOfBounds::Inside: break; // to avoid warning
+            return;
       }
    }
 }
@@ -89,7 +90,9 @@ Teewee::Teewee() {
 
 Smashboy::Smashboy() {
    p_id = CellType::Smashboy;
-   cells[RotationState::Zero] = {{ {0, 0}, {0, 1}, {1, 0}, {1, 1} }};
+   for(int i = 0; i < 4; i++) {
+      cells[static_cast<RotationState>(i)] = {{ {0, 0}, {0, 1}, {1, 0}, {1, 1} }};
+   }
    p_positionOffset = {0, 4};
 }
 

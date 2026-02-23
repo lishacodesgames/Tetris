@@ -1,7 +1,8 @@
 #pragma once
+// ik Vector2 exists but for Tetris, {row, col} makes more sense to me than {x, y}
 
-/// a cell's coodinate position rin our grid
-struct Position { 
+/// a cell's coodinate position in our grid
+struct Position {
    int row;
    int col; 
 

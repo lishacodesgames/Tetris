@@ -42,9 +42,6 @@ void Game::HandleEvents() {
       case KEY_RIGHT:
          currentBlock.Move({0, 1});
          break;
-      case KEY_UP:
-         currentBlock.Move({-1, 0});
-         break;
       case KEY_DOWN:
          currentBlock.Move({1, 0});
          break;   
@@ -52,11 +49,27 @@ void Game::HandleEvents() {
          currentBlock.Rotate();
          break;
    }
+
+   if(hasTimeElapsed(GetFrameTime(), 0.35f)) {
+      currentBlock.applyGravity();
+   }
 }
 
 void Game::Draw() {
    grid.Draw();
    currentBlock.Draw();
+}
+
+bool Game::hasTimeElapsed(float dt, float gravityInterval) {
+   secondsElapsed += dt;
+
+   if(secondsElapsed >= gravityInterval) {
+      // not 0 to account for lag. i.e. if lag of 2s, after lag the block will have moved extra 
+      // as if the lag never happened
+      secondsElapsed -= gravityInterval;
+      return true;
+   }
+   return false;
 }
 
 Block Game::getRandomBlock() {
