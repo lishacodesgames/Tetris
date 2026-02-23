@@ -9,14 +9,25 @@
 #include "Position.h"
 
 Block::Block() {
-   m_cellSize = 30;
+   m_grid.cellSize = 30;
    m_rotation = RotationState::Zero;
    p_positionOffset = {0, 3}; // default spawn in the center, overridden by some
+}
+Block::RotationState& operator++(Block::RotationState& r) {
+   r = static_cast<Block::RotationState>( ( 1 + static_cast<int>(r) ) % 4 ); // % 4 makes it wrap around to 0
+   return r;
 }
 
 void Block::Move(Position offset) {
    p_positionOffset += offset;
    m_considerBounds();
+}
+
+void Block::Rotate() {
+   ++m_rotation;
+   m_considerBounds();
+   if(p_id == CellType::Hero)
+      m_considerBounds();
 }
 
 void Block::Draw() {
@@ -25,8 +36,8 @@ void Block::Draw() {
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);
       DrawRectangle(
-         cell.col * m_cellSize + 1, cell.row * m_cellSize + 1,
-         m_cellSize - 1, m_cellSize - 1, cellColorMap[id]
+         cell.col * m_grid.cellSize + 1, cell.row * m_grid.cellSize + 1,
+         m_grid.cellSize - 1, m_grid.cellSize - 1, cellColorMap[p_id]
       );
    }
 }
@@ -42,9 +53,7 @@ std::array<Position, 4> Block::p_getBlockPosition() {
 }
 
 void Block::m_considerBounds() {
-   std::array<Position, 4> block = p_getBlockPosition();
-
-   for(const Position& cell : block) {
+   for(const Position& cell : p_getBlockPosition()) {
       if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Top) {
          p_positionOffset += {1, 0}; 
          break;
@@ -67,7 +76,7 @@ void Block::m_considerBounds() {
 /// outer brace: std::array, inner brace: c-array
 
 Hero::Hero() {
-   id = CellType::Hero;
+   p_id = CellType::Hero;
    cells[RotationState::Zero] = {{ {1, 0}, {1, 1}, {1, 2}, {1, 3} }};
    cells[RotationState::Ninety] = {{ {0, 2}, {1, 2}, {2, 2}, {3, 2} }};
    cells[RotationState::OneEighty] = {{ {2, 0}, {2, 1}, {2, 2}, {2, 3} }};
@@ -76,7 +85,7 @@ Hero::Hero() {
 }
 
 Teewee::Teewee() {
-   id = CellType::Teewee;
+   p_id = CellType::Teewee;
    cells[RotationState::Zero] = {{ {1, 0}, {1, 1}, {1, 2}, {0, 1} }};
    cells[RotationState::Ninety] = {{ {0, 1}, {1, 1}, {2, 1}, {1, 2} }};
    cells[RotationState::OneEighty] = {{ {1, 0}, {1, 1}, {1, 2}, {2, 1} }};
@@ -84,13 +93,13 @@ Teewee::Teewee() {
 }
 
 Smashboy::Smashboy() {
-   id = CellType::Smashboy;
+   p_id = CellType::Smashboy;
    cells[RotationState::Zero] = {{ {0, 0}, {0, 1}, {1, 0}, {1, 1} }};
    p_positionOffset = {0, 4};
 }
 
 Ricky::Ricky() {
-   id = CellType::Ricky;
+   p_id = CellType::Ricky;
    cells[RotationState::Zero] = {{ {0, 2}, {1, 2}, {1, 1}, {1, 0}} }; 
    cells[RotationState::Ninety] = {{ {2, 2}, {2, 1}, {1, 1}, {0, 1} }};
    cells[RotationState::OneEighty] = {{ {2, 0}, {1, 0}, {1, 1}, {1, 2} }};
@@ -98,7 +107,7 @@ Ricky::Ricky() {
 }
 
 AutRicky::AutRicky() {
-   id = CellType::AutRicky;
+   p_id = CellType::AutRicky;
    cells[RotationState::Zero] = {{ {0, 0}, {1, 0}, {1, 1}, {1, 2} }};
    cells[RotationState::Ninety] = {{ {0, 2}, {0, 1}, {1, 1}, {2, 1} }};
    cells[RotationState::OneEighty] = {{ {2, 2}, {1, 2}, {1, 1}, {1, 0} }};
@@ -106,7 +115,7 @@ AutRicky::AutRicky() {
 }
 
 Snake::Snake() {
-   id = CellType::Snake;
+   p_id = CellType::Snake;
    cells[RotationState::Zero] = {{ {1, 0}, {1, 1}, {0, 1}, {0, 2} }};
    cells[RotationState::Ninety] = {{ {0, 1}, {1, 1}, {1, 2}, {2, 2} }};
    cells[RotationState::OneEighty] = {{ {2, 0}, {2, 1}, {1, 1}, {1, 2} }};
@@ -114,7 +123,7 @@ Snake::Snake() {
 }
 
 Znake::Znake() {
-   id = CellType::Znake;
+   p_id = CellType::Znake;
    cells[RotationState::Zero] = {{ {0, 0}, {0, 1}, {1, 1}, {1, 2} }};
    cells[RotationState::Ninety] = {{ {0, 2}, {1, 2}, {1, 1}, {2, 1} }};
    cells[RotationState::OneEighty] = {{ {1, 0}, {1, 1}, {2, 1}, {2, 2} }};

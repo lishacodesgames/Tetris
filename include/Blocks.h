@@ -15,6 +15,7 @@ protected:
     * This attributes tells us the positionOffset of the top-left corner of that grid
     */
    Position p_positionOffset; 
+   CellType p_id; /// type of block
 
    /// Moves each cell by given position offset
    std::array<Position, 4> p_getBlockPosition();
@@ -24,18 +25,17 @@ public:
 
    /// 0deg position = position with most cells in North-East, then 90deg clockwise from there
    enum class RotationState {Zero, Ninety, OneEighty, TwoSeventy};
-
-   CellType id; /// type of block
+   friend RotationState& operator++(RotationState& r); /// prefix increment operator
 
    /// Tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells;
 
    Block();
    void Move(Position offset);
+   void Rotate(); /// Rotations block clockwise
    void Draw();
 
 private:
-   int m_cellSize;
    RotationState m_rotation;
 
    Grid m_grid;

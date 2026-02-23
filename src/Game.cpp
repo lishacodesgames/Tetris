@@ -45,6 +45,9 @@ void Game::HandleEvents() {
       case KEY_DOWN:
          currentBlock.Move({1, 0});
          break;   
+      case KEY_SPACE:
+         currentBlock.Rotate();
+         break;
    }
 }
 

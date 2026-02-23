@@ -6,10 +6,10 @@
 
 class Grid {
    int m_rows, m_columns;
-   int m_cellSize;
-public:
+   public:
    /// rows = 20, columns = 10
    std::array<std::array<CellType, 10>, 20> grid{};
+   int cellSize;
 
    enum class OutOfBounds { Inside, Top, Right, Bottom, Left };
    OutOfBounds checkBounds(const Position& cell);
