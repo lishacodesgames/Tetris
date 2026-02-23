@@ -12,14 +12,17 @@ It has Raylib as a submodule, thus there are no external dependencies. <br>
 ![RayLib](https://img.shields.io/badge/RAYLIB-FFFFFF?style=for-the-badge&logo=raylib&logoColor=black)
 
 ## Running cmake build
-* With vscode: Just run it by selecting preset (Debug for details, Release for efficiency)
-* With terminal: <br>
+* Presets: Debug for details, Release for efficiency
+* &nbsp; Builds Tetris executable in build\Debug or build\Release
+* With terminal (configure, then build): <br>
 ```
 cmake --preset Debug (or Release)
 cmake --build --preset Debug (or Release)
 ```
 * Or if you've got vscode and the cmake tools extension installed: <br>
-VSCode configures and builds automatically, since I've included a `CMakePresets.json` :D
-<br>
+&nbsp; 1. `ctrl/cmd + Shift + P` to open commands panel at the top <br>
+&nbsp; 2. `CMake: Select Configure Preset` <br>
+&nbsp; 3. `CMake: Configure` (usually vscode does this automatically once your preset is selected) <br>
+&nbsp; 4. `CMake: Build` or `CMake: Build Target` <br>
 
 Simple :D
