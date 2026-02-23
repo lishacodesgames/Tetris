@@ -17,3 +17,5 @@ public:
 
    void Draw();
 };
+
+inline Grid g_grid;

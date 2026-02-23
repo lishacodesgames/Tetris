@@ -1,6 +1,5 @@
 #pragma once
 #include <unordered_map>
-#include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
 
@@ -27,15 +26,19 @@ public:
    /// Tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells{};
 
-   void applyGravity();
+   bool isLocked = false; // if block is at the bottom
+
+   void Fall();
    void Move(Position offset);
    void Rotate(); /// Rotations block clockwise
    void Draw();
 
 private:
    RotationState m_rotation = RotationState::Zero;
-   Grid m_grid;
 
+   /// Makes the block's cells permanent in the grid
+   void m_lockBlock();
+   
    /// Origin + offset = current position
    std::array<Position, 4> m_getBlockPosition();
    void m_considerBounds();

@@ -1,10 +1,8 @@
 #pragma once
 #include <vector>
 #include "Blocks.h"
-#include "Grid.h"
 
 class Game {
-   Grid grid;
    std::vector<Block> blocks{};
    Block currentBlock;
    Block nextBlock;
@@ -19,8 +17,13 @@ class Game {
    void HandleEvents();
    void Draw();
    
-   float secondsElapsed = 0.0f; // time elapsed since last tick-event
-   bool hasTimeElapsed(float dt, float gravityInterval);
+   float timeSinceFall = 0.0f; // time elapsed in seconds since last fall
+   
+   /**
+    * @param dt Time since last frame (explicitly needed bcz lag)
+    * @param fallInterval Time between each fall
+    */
+   bool shouldFall(float dt, float fallInterval);
 public:
    Game() = default;
    void Init();

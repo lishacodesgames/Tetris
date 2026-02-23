@@ -50,23 +50,28 @@ void Game::HandleEvents() {
          break;
    }
 
-   if(hasTimeElapsed(GetFrameTime(), 0.35f)) {
-      currentBlock.applyGravity();
+   if(shouldFall(GetFrameTime(), 0.35f)) {
+      currentBlock.Fall();
+   }
+
+   if(currentBlock.isLocked) {
+      currentBlock = nextBlock;
+      nextBlock = getRandomBlock();
    }
 }
 
 void Game::Draw() {
-   grid.Draw();
+   g_grid.Draw();
    currentBlock.Draw();
 }
 
-bool Game::hasTimeElapsed(float dt, float gravityInterval) {
-   secondsElapsed += dt;
+bool Game::shouldFall(float dt, float fallInterval) {
+   timeSinceFall += dt;
 
-   if(secondsElapsed >= gravityInterval) {
+   if(timeSinceFall >= fallInterval) {
       // not 0 to account for lag. i.e. if lag of 2s, after lag the block will have moved extra 
       // as if the lag never happened
-      secondsElapsed -= gravityInterval;
+      timeSinceFall -= fallInterval;
       return true;
    }
    return false;

@@ -11,16 +11,19 @@ Block::RotationState& operator++(Block::RotationState& r) {
    return r;
 }
 
-void Block::applyGravity() {
+void Block::Fall() {
+   if(isLocked) return;
    Move({1, 0});
 }
 
 void Block::Move(Position offset) {
+   if(isLocked) return;
    p_positionOffset += offset;
    m_considerBounds();
 }
 
 void Block::Rotate() {
+   if(isLocked) return;
    ++m_rotation;
    m_considerBounds();
    if(p_id == CellType::Hero)
@@ -33,9 +36,18 @@ void Block::Draw() {
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);
       DrawRectangle(
-         cell.col * m_grid.cellSize + 1, cell.row * m_grid.cellSize + 1,
-         m_grid.cellSize - 1, m_grid.cellSize - 1, cellColorMap[p_id]
+         cell.col * g_grid.cellSize + 1, cell.row * g_grid.cellSize + 1,
+         g_grid.cellSize - 1, g_grid.cellSize - 1, cellColorMap[p_id]
       );
+   }
+}
+
+void Block::m_lockBlock() {
+   isLocked = true;
+   std::array<Position, 4> block = m_getBlockPosition();
+   
+   for(Position& cell : block) {
+      g_grid.grid[cell.row][cell.col] = this->p_id;
    }
 }
 
@@ -52,7 +64,7 @@ std::array<Position, 4> Block::m_getBlockPosition() {
 void Block::m_considerBounds() {
    Grid::OutOfBounds bounds;
    for(const Position& cell : m_getBlockPosition()) {
-      bounds = m_grid.checkBounds(cell);
+      bounds = g_grid.checkBounds(cell);
 
       switch(bounds) {
          case Grid::OutOfBounds::Inside: break;
@@ -61,6 +73,7 @@ void Block::m_considerBounds() {
             return;
          case Grid::OutOfBounds::Bottom:
             p_positionOffset += {-1, 0};
+            m_lockBlock();
             return;
          case Grid::OutOfBounds::Left:
             p_positionOffset += {0, 1};
