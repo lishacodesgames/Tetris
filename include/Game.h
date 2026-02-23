@@ -10,12 +10,16 @@ class Game {
    Block currentBlock;
    Block nextBlock;
 
-   /// @brief Tetris uses a 7-bag system. It generates 7 blocks, uses each till vector is empty, then refills
+   /** 7-bag 
+    * Tetris uses a 7-bag system. 
+    * It generates 7 blocks, uses each till vector is empty, then refills 
+    */
    Block getRandomBlock();
    std::vector<Block> resetBlockBag();
    
    void HandleEvents();
    void Draw();
+   
 public:
    Game() = default;
    void Init();

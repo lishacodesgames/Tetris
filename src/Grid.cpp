@@ -5,11 +5,11 @@
 #include "Colors.h"
 
 Grid::Grid() {
-   rows = 20;
-   columns = 10;
-   cellSize = 30;
+   m_rows = 20;
+   m_columns = 10;
+   m_cellSize = 30;
 
-   // all cells in grid = 0
+   // all cells in grid <- 0
    for(auto& row : grid) {
       for(CellType& cell : row) {
          cell = CellType::Empty;
@@ -18,10 +18,9 @@ Grid::Grid() {
 }
 
 void Grid::Draw() {
-   // permanently placed blocks
-   for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < columns; col++) {
-         DrawRectangle(col * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, cellColorMap[ grid.at(row).at(col) ]);
+   for (int row = 0; row < m_rows; row++) {
+      for (int col = 0; col < m_columns; col++) {
+         DrawRectangle(col * m_cellSize + 1, row * m_cellSize + 1, m_cellSize - 1, m_cellSize - 1, cellColorMap[ grid.at(row).at(col) ]);
       }
    }
 }

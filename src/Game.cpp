@@ -1,5 +1,6 @@
 #include <Precompiled.h>
 #include <raylib.h>
+#include <vector>
 #include <random>
 #include <ctime>
 #include "Game.h"
@@ -15,12 +16,13 @@ void Game::Init() {
    currentBlock = getRandomBlock();
    nextBlock = getRandomBlock();
 }
+
 void Game::Run() {
    while(!WindowShouldClose()) {
+      HandleEvents();
+
       BeginDrawing();
       ClearBackground(ColorBrightness(cellColorMap[CellType::Empty], 0.04f)); // color of the gridlines
-
-      HandleEvents();
       Draw();
       EndDrawing();
    }
