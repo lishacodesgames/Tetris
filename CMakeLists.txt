@@ -17,6 +17,8 @@ add_executable(${PROJECT_NAME}
    src/Grid.cpp
    src/main.cpp
 )
+target_sources(${PROJECT_NAME} PRIVATE tetris256.rc) # tetris.exe icon
+
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang") # won't work for MSVC
    target_compile_options(${PROJECT_NAME} PRIVATE
       -Wall
