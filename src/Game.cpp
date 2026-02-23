@@ -31,13 +31,26 @@ void Game::Run() {
 }
 
 void Game::HandleEvents() {
-   nextBlock.Move({11, 4});
+   int key = GetKeyPressed();
+   switch(key) {
+      case KEY_LEFT:
+         currentBlock.Move({0, -1});
+         break;
+      case KEY_RIGHT:
+         currentBlock.Move({0, 1});
+         break;
+      case KEY_UP:
+         currentBlock.Move({-1, 0});
+         break;
+      case KEY_DOWN:
+         currentBlock.Move({1, 0});
+         break;   
+   }
 }
 
 void Game::Draw() {
    grid.Draw();
    currentBlock.Draw();
-   nextBlock.Draw();
 }
 
 Block Game::getRandomBlock() {

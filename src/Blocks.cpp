@@ -13,22 +13,18 @@ Block::Block() {
    p_positionOffset = {0, 3}; // default spawn in the center, overridden by some
 }
 
-std::array<Position, 4> Block::getBlockPosition() {
-   std::array<Position, 4> blockPosition = cells.at(rotation);
-   std::vector<Position> movedPositions{};
-
-   for(Position& currentCellPosition : blockPosition) {
-      movedPositions.push_back(currentCellPosition + positionOffset);
-   }
-
-   std::array<Position, 4> finalBlockPosition{};
-   std::copy(movedPositions.begin(), movedPositions.end(), finalBlockPosition.begin());
-
-   return finalBlockPosition;
+void Block::Move(Position offset) {
+   p_positionOffset += offset;
 }
 
-void Block::Move(Position offset) {
-   positionOffset = offset;
+std::array<Position, 4> Block::p_getBlockPosition() {
+   std::array<Position, 4> blockPosition = cells.at(m_rotation);
+
+   for(Position& cell : blockPosition) {
+      cell += p_positionOffset;
+   }
+
+   return blockPosition;
 }
 
 void Block::Draw() {
