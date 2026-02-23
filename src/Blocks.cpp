@@ -6,28 +6,46 @@
 #include "Colors.h"
 #include "Position.h"
 
+#include <string>
+#include <stdexcept>
+
 Block::RotationState& operator++(Block::RotationState& r) {
    r = static_cast<Block::RotationState>( ( 1 + static_cast<int>(r) ) % 4 ); // % 4 makes it wrap around to 0
    return r;
 }
+Block::RotationState& operator--(Block::RotationState& r) {
+   r = static_cast<Block::RotationState>( ( 3 + static_cast<int>(r) ) % 4 ); // -1 in modulo = mod-1 = +3
+   return r;
+}
 
 void Block::Fall() {
-   if(isLocked) return;
    Move({1, 0});
 }
 
 void Block::Move(Position offset) {
    if(isLocked) return;
    p_positionOffset += offset;
-   m_considerBounds();
+
+   Grid::OutOfBounds bounds = m_considerBounds();
+   if(bounds != Grid::OutOfBounds::Inside || m_isColliding()) {
+      p_positionOffset -= offset;
+      if(offset == Position{1, 0})
+         m_lockBlock();
+   }
 }
 
 void Block::Rotate() {
    if(isLocked) return;
    ++m_rotation;
-   m_considerBounds();
-   if(p_id == CellType::Hero)
+
+   if(p_id == CellType::Hero) // can rotate out so needs an extra check
       m_considerBounds();
+
+   // only lock on 2nd check
+   Grid::OutOfBounds bounds = m_considerBounds();
+   if(bounds != Grid::OutOfBounds::Inside || m_isColliding()) {
+      --m_rotation;
+   }
 }
 
 void Block::Draw() {
@@ -47,7 +65,13 @@ void Block::m_lockBlock() {
    std::array<Position, 4> block = m_getBlockPosition();
    
    for(Position& cell : block) {
-      g_grid.grid[cell.row][cell.col] = this->p_id;
+      try {
+         g_grid.grid[cell.row][cell.col] = this->p_id;
+      } catch(std::out_of_range& e) {
+         std::string error = "Row: " + std::to_string(cell.row) + "  Column: " + std::to_string(cell.col) + "   (ERROR)   ";
+         DrawText(error.c_str(), 100, 20, 40, WHITE);
+      }
+      
    }
 }
 
@@ -61,25 +85,22 @@ std::array<Position, 4> Block::m_getBlockPosition() {
    return blockPosition; // current position
 }
 
-void Block::m_considerBounds() {
+Grid::OutOfBounds Block::m_considerBounds() {
    Grid::OutOfBounds bounds;
    for(const Position& cell : m_getBlockPosition()) {
       bounds = g_grid.checkBounds(cell);
-
-      switch(bounds) {
-         case Grid::OutOfBounds::Inside: break;
-         case Grid::OutOfBounds::Right:
-            p_positionOffset += {0, -1}; 
-            return;
-         case Grid::OutOfBounds::Bottom:
-            p_positionOffset += {-1, 0};
-            m_lockBlock();
-            return;
-         case Grid::OutOfBounds::Left:
-            p_positionOffset += {0, 1};
-            return;
-      }
+      if(bounds != Grid::OutOfBounds::Inside)
+         return bounds;
    }
+   return Grid::OutOfBounds::Inside; // no cells were out of bounds
+}
+
+bool Block::m_isColliding() {
+   for(const Position& cell : m_getBlockPosition()) {
+      if(!g_grid.isCellEmpty(cell))
+         return true;
+   }
+   return false;
 }
 
 /// outer brace: std::array, inner brace: c-array

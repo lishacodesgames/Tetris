@@ -3,6 +3,7 @@
 #include <utility>
 #include <vector>
 #include <array>
+#include <string>
 
 // ---- RAYLIB ----
 #include <raylib.h>
@@ -11,5 +12,6 @@
 #include <random>
 #include <ctime>
 
-// ---- ALGORITHM ----
+// ---- OTHER ----
 #include <algorithm>
+#include <stdexcept>

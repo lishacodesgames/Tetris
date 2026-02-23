@@ -10,10 +10,21 @@ struct Position {
       return {row + other.row, col + other.col};
    }
 
-   /// @return Reference to the original caller 
    Position& operator+=(const Position& other) {
-      row += other.row;
-      col += other.col;
+      this->row += other.row;
+      this->col += other.col;
       return *this;
+   }
+
+   Position& operator-=(const Position& other) {
+      this->row -= other.row;
+      this->col -= other.col;
+      return *this;
+   }
+
+   bool operator==(const Position& other) const {
+      if(this->row == other.row && this->col == other.col)
+         return true;
+      else return false;
    }
 };

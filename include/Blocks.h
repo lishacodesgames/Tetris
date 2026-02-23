@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_map>
+#include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
 
@@ -22,6 +23,7 @@ public:
    /// 0deg position = position with most cells in North-East, then 90deg clockwise from there
    enum class RotationState { Zero, Ninety, OneEighty, TwoSeventy };
    friend RotationState& operator++(RotationState& r); /// prefix increment operator
+   friend RotationState& operator--(RotationState& r); /// prefix decrement operator
 
    /// Tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells{};
@@ -41,7 +43,8 @@ private:
    
    /// Origin + offset = current position
    std::array<Position, 4> m_getBlockPosition();
-   void m_considerBounds();
+   Grid::OutOfBounds m_considerBounds();
+   bool m_isColliding();
 };
 
 // -------------- CHILDREN BLOCKS --------------
