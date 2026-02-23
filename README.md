@@ -15,10 +15,11 @@ It has Raylib as a submodule, thus there are no external dependencies. <br>
 * With vscode: Just run it by selecting preset (Debug for details, Release for efficiency)
 * With terminal: <br>
 ```
-cmake --preset Debug
-cmage --build --preset Debug
+cmake --preset Debug (or Release)
+cmake --build --preset Debug (or Release)
 ```
-Or replace with "Release" or whatever else preset you'd like to add.
+* Or if you've got vscode and the cmake tools extension installed: <br>
+VSCode configures and builds automatically, since I've included a `CMakePresets.json` :D
 <br>
 
 Simple :D
