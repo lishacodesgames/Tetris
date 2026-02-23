@@ -1,4 +1,5 @@
 #pragma once
+#include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
 #include <unordered_map>
@@ -36,6 +37,9 @@ public:
 private:
    int m_cellSize;
    RotationState m_rotation;
+
+   Grid m_grid;
+   void m_considerBounds();
 };
 
 // -------------- CHILDREN BLOCKS --------------

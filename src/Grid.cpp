@@ -3,6 +3,7 @@
 #include <vector>
 #include "Grid.h"
 #include "Colors.h"
+#include "Position.h"
 
 Grid::Grid() {
    m_rows = 20;
@@ -23,4 +24,17 @@ void Grid::Draw() {
          DrawRectangle(col * m_cellSize + 1, row * m_cellSize + 1, m_cellSize - 1, m_cellSize - 1, cellColorMap[ grid.at(row).at(col) ]);
       }
    }
+}
+
+Grid::OutOfBounds Grid::checkBounds(const Position& cell) {
+   if(cell.row < 0)
+      return OutOfBounds::Top;
+   else if(cell.col >= m_columns)
+      return OutOfBounds::Right;
+   else if(cell.row >= m_rows)
+      return OutOfBounds::Bottom;
+   else if(cell.col < 0)
+      return OutOfBounds::Left;
+   else 
+      return OutOfBounds::Inside;
 }

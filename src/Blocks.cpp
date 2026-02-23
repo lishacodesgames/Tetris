@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <vector>
+#include "Grid.h"
 #include "Blocks.h"
 #include "Colors.h"
 #include "Position.h"
@@ -15,6 +16,19 @@ Block::Block() {
 
 void Block::Move(Position offset) {
    p_positionOffset += offset;
+   m_considerBounds();
+}
+
+void Block::Draw() {
+   std::array<Position, 4> block = p_getBlockPosition();
+   
+   for(int i = 0; i < 4; i++) {
+      Position& cell = block.at(i);
+      DrawRectangle(
+         cell.col * m_cellSize + 1, cell.row * m_cellSize + 1,
+         m_cellSize - 1, m_cellSize - 1, cellColorMap[id]
+      );
+   }
 }
 
 std::array<Position, 4> Block::p_getBlockPosition() {
@@ -27,15 +41,26 @@ std::array<Position, 4> Block::p_getBlockPosition() {
    return blockPosition;
 }
 
-void Block::Draw() {
+void Block::m_considerBounds() {
    std::array<Position, 4> block = p_getBlockPosition();
 
-   for(int i = 0; i < 4; i++) {
-      Position& cell = block.at(i);
-      DrawRectangle(
-         cell.col * m_cellSize + 1, cell.row * m_cellSize + 1,
-         m_cellSize - 1, m_cellSize - 1, cellColorMap[id]
-      );
+   for(const Position& cell : block) {
+      if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Top) {
+         p_positionOffset += {1, 0}; 
+         break;
+      }
+      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Right) {
+         p_positionOffset += {0, -1}; 
+         break;
+      }
+      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Bottom) {
+         p_positionOffset += {-1, 0};
+         break;
+      }
+      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Left) {
+         p_positionOffset += {0, 1};
+         break;
+      }
    }
 }
 
