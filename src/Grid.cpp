@@ -5,23 +5,14 @@
 #include "Colors.h"
 #include "Position.h"
 
-Grid::Grid() {
-   m_rows = 20;
-   m_columns = 10;
-   cellSize = 30;
-
-   // all cells in grid <- 0
-   for(auto& row : grid) {
-      for(CellType& cell : row) {
-         cell = CellType::Empty;
-      }
-   }
-}
-
 void Grid::Draw() {
    for (int row = 0; row < m_rows; row++) {
       for (int col = 0; col < m_columns; col++) {
-         DrawRectangle(col * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, cellColorMap[ grid.at(row).at(col) ]);
+         DrawRectangle(
+            col * cellSize + 1, row * cellSize + 1, 
+            cellSize - 1, cellSize - 1, 
+            cellColorMap[ grid.at(row).at(col) ]
+         );
       }
    }
 }

@@ -1,44 +1,43 @@
 #pragma once
+#include <unordered_map>
 #include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
-#include <unordered_map>
-#include <vector>
 
 /// each piece will be enveloped in a mini-grid so it can rotate safely
 class Block {
 protected: 
 // -------------- PROTECTED --------------
 
-   /** offset of block's origin
+   /** block's coordinates
     * @details each block has its own nxn grid. 
     * This attributes tells us the positionOffset of the top-left corner of that grid
+    * Basically just the position of the block
     */
-   Position p_positionOffset; 
-   CellType p_id; /// type of block
+   Position p_positionOffset = {0, 3}; // overwritten by some child classes 
+   CellType p_id = CellType::Empty; /// type of block
 
-   /// Moves each cell by given position offset
+   /// Origin + offset = current position
    std::array<Position, 4> p_getBlockPosition();
    
 public:
 // -------------- PUBLIC --------------
 
    /// 0deg position = position with most cells in North-East, then 90deg clockwise from there
-   enum class RotationState {Zero, Ninety, OneEighty, TwoSeventy};
+   enum class RotationState { Zero, Ninety, OneEighty, TwoSeventy };
    friend RotationState& operator++(RotationState& r); /// prefix increment operator
 
    /// Tetromino's 4 cells -> occupy which 4 positions 
-   std::unordered_map<RotationState, std::array<Position, 4>> cells;
+   std::unordered_map<RotationState, std::array<Position, 4>> cells{};
 
-   Block();
    void Move(Position offset);
    void Rotate(); /// Rotations block clockwise
    void Draw();
 
 private:
-   RotationState m_rotation;
-
+   RotationState m_rotation = RotationState::Zero;
    Grid m_grid;
+
    void m_considerBounds();
 };
 
@@ -99,5 +98,4 @@ class Znake : public Block {
 public:
    Znake();
 };
-
 

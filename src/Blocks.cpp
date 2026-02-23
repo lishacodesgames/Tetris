@@ -1,18 +1,11 @@
 #include <Precompiled.h>
-#include <unordered_map>
-#include <algorithm>
 #include <array>
-#include <vector>
-#include "Grid.h"
 #include "Blocks.h"
+
+#include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
 
-Block::Block() {
-   m_grid.cellSize = 30;
-   m_rotation = RotationState::Zero;
-   p_positionOffset = {0, 3}; // default spawn in the center, overridden by some
-}
 Block::RotationState& operator++(Block::RotationState& r) {
    r = static_cast<Block::RotationState>( ( 1 + static_cast<int>(r) ) % 4 ); // % 4 makes it wrap around to 0
    return r;
@@ -43,32 +36,34 @@ void Block::Draw() {
 }
 
 std::array<Position, 4> Block::p_getBlockPosition() {
-   std::array<Position, 4> blockPosition = cells.at(m_rotation);
+   std::array<Position, 4> blockPosition = cells.at(m_rotation); // origin position
 
    for(Position& cell : blockPosition) {
       cell += p_positionOffset;
    }
 
-   return blockPosition;
+   return blockPosition; // current position
 }
 
 void Block::m_considerBounds() {
+   Grid::OutOfBounds bounds;
    for(const Position& cell : p_getBlockPosition()) {
-      if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Top) {
-         p_positionOffset += {1, 0}; 
-         break;
-      }
-      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Right) {
-         p_positionOffset += {0, -1}; 
-         break;
-      }
-      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Bottom) {
-         p_positionOffset += {-1, 0};
-         break;
-      }
-      else if(m_grid.checkBounds(cell) == Grid::OutOfBounds::Left) {
-         p_positionOffset += {0, 1};
-         break;
+      bounds = m_grid.checkBounds(cell);
+
+      switch(bounds) {
+         case Grid::OutOfBounds::Top:
+            p_positionOffset += {1, 0}; 
+            break;
+         case Grid::OutOfBounds::Right:
+            p_positionOffset += {0, -1}; 
+            break;
+         case Grid::OutOfBounds::Bottom:
+            p_positionOffset += {-1, 0};
+            break;
+         case Grid::OutOfBounds::Left:
+            p_positionOffset += {0, 1};
+            break;
+         case Grid::OutOfBounds::Inside: break; // to avoid warning
       }
    }
 }

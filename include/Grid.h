@@ -5,15 +5,15 @@
 #include <array>
 
 class Grid {
-   int m_rows, m_columns;
-   public:
-   /// rows = 20, columns = 10
+   int m_rows = 20; /// height
+   int m_columns = 10; /// width
+public:
+   /// all elements initialize to CellType::Empty
    std::array<std::array<CellType, 10>, 20> grid{};
-   int cellSize;
+   int cellSize = 30;
 
    enum class OutOfBounds { Inside, Top, Right, Bottom, Left };
    OutOfBounds checkBounds(const Position& cell);
 
-   Grid();
    void Draw();
 };

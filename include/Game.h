@@ -1,7 +1,7 @@
 #pragma once
+#include <vector>
 #include "Blocks.h"
 #include "Grid.h"
-#include <vector>
 
 class Game {
    Grid grid;

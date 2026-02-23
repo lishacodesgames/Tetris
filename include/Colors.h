@@ -13,7 +13,7 @@ enum class CellType {
    Znake //Z
 };
 struct GridColorValues {
-   Color Empty = {30, 30, 46, 255}; // rgb(30, 30, 46)
+   Color Empty = {30, 30, 46, 255}; // -- rgb(30, 30, 46)
    Color Hero = {0, 200, 215, 255}; // I -- rgb(0, 200, 215)
    Color Teewee = {155, 93, 229, 255}; // T -- rgb(155, 93, 229)
    Color Smashboy = {242, 201, 76, 255}; // 2x2 -- rgb(242, 201, 76)

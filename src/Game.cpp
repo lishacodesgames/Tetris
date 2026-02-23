@@ -4,7 +4,10 @@
 #include <random>
 #include <ctime>
 #include "Game.h"
+
+#include "Blocks.h"
 #include "Colors.h"
+#include "Grid.h"
 #include "Position.h"
 
 void Game::Init() {
