@@ -60,6 +60,8 @@ void Game::HandleEvents() {
       currentBlock = nextBlock;
       nextBlock = getRandomBlock();
    }
+
+   g_grid.Clean();
 }
 
 void Game::Draw() {
@@ -71,9 +73,7 @@ bool Game::shouldFall(float dt, float fallInterval) {
    timeSinceFall += dt;
 
    if(timeSinceFall >= fallInterval) {
-      // not 0 to account for lag. i.e. if lag of 2s, after lag the block will have moved extra 
-      // as if the lag never happened
-      timeSinceFall -= fallInterval;
+      timeSinceFall = 0.0f; // not accounting for lag bcz it can mess up gameplay
       return true;
    }
    return false;
