@@ -12,7 +12,7 @@
 
 void Game::Init() {
    InitWindow(300, 600, "Tetris");
-   SetTargetFPS(60);
+   SetTargetFPS(30);
    srand(time(0));
 
    blocks = resetBlockBag();
@@ -35,7 +35,7 @@ void Game::Run() {
 
 void Game::HandleEvents() {
    int key = GetKeyPressed();
-   while(key != 0){ // processes all keys in queue, 0 = empty queue
+   while(key != 0) { // processes all keys in queue, 0 = empty
       switch(key) {
          case KEY_LEFT:
             currentBlock.Move({0, -1});
@@ -43,16 +43,14 @@ void Game::HandleEvents() {
          case KEY_RIGHT:
             currentBlock.Move({0, 1});
             break;
-         case KEY_DOWN:
-            currentBlock.Move({1, 0});
-            break;   
          case KEY_SPACE:
             currentBlock.Rotate();
             break;
       }
-
       key = GetKeyPressed();
    }
+   if(IsKeyDown(KEY_DOWN)) // VERY fast fall
+      currentBlock.Move({1, 0});
 
    if(shouldFall(GetFrameTime(), 0.35f)) {
       currentBlock.Fall();

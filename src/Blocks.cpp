@@ -41,9 +41,13 @@ void Block::Rotate() {
    ++m_rotation;
 
    Grid::OutOfBounds bounds = m_considerBounds();
-   if(bounds != Grid::OutOfBounds::Inside || m_isColliding()) {
+   if(bounds == Grid::OutOfBounds::Left)
+      p_positionOffset += {0, 1}; // allows rotation while keeping within bounds
+   else if(bounds == Grid::OutOfBounds::Right)
+      p_positionOffset -= {0, 1};
+   else if(bounds != Grid::OutOfBounds::Inside || m_isColliding())
       --m_rotation;
-   }
+   else return; // rotation successfull
 }
 
 void Block::Draw() {
