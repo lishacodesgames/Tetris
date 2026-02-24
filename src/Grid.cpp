@@ -29,7 +29,7 @@ Grid::OutOfBounds Grid::checkBounds(const Position& cell) {
 }
 
 bool Grid::isCellEmpty(const Position& cell) {
-   if(grid.at(cell.row).at(cell.col) == CellType::Empty)
+   if(cell.row == -1 || grid.at(cell.row).at(cell.col) == CellType::Empty)
       return true;
    else return false;
 }

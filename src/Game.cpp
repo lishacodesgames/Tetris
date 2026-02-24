@@ -35,19 +35,23 @@ void Game::Run() {
 
 void Game::HandleEvents() {
    int key = GetKeyPressed();
-   switch(key) {
-      case KEY_LEFT:
-         currentBlock.Move({0, -1});
-         break;
-      case KEY_RIGHT:
-         currentBlock.Move({0, 1});
-         break;
-      case KEY_DOWN:
-         currentBlock.Move({1, 0});
-         break;   
-      case KEY_SPACE:
-         currentBlock.Rotate();
-         break;
+   while(key != 0){ // processes all keys in queue, 0 = empty queue
+      switch(key) {
+         case KEY_LEFT:
+            currentBlock.Move({0, -1});
+            break;
+         case KEY_RIGHT:
+            currentBlock.Move({0, 1});
+            break;
+         case KEY_DOWN:
+            currentBlock.Move({1, 0});
+            break;   
+         case KEY_SPACE:
+            currentBlock.Rotate();
+            break;
+      }
+
+      key = GetKeyPressed();
    }
 
    if(shouldFall(GetFrameTime(), 0.35f)) {

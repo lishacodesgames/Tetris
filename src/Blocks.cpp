@@ -23,7 +23,8 @@ void Block::Fall() {
 }
 
 void Block::Move(Position offset) {
-   if(isLocked) return;
+   if(isLocked) 
+      return;
    p_positionOffset += offset;
 
    Grid::OutOfBounds bounds = m_considerBounds();
@@ -35,13 +36,10 @@ void Block::Move(Position offset) {
 }
 
 void Block::Rotate() {
-   if(isLocked) return;
+   if(isLocked) 
+      return;
    ++m_rotation;
 
-   if(p_id == CellType::Hero) // can rotate out so needs an extra check
-      m_considerBounds();
-
-   // only lock on 2nd check
    Grid::OutOfBounds bounds = m_considerBounds();
    if(bounds != Grid::OutOfBounds::Inside || m_isColliding()) {
       --m_rotation;
@@ -65,13 +63,7 @@ void Block::m_lockBlock() {
    std::array<Position, 4> block = m_getBlockPosition();
    
    for(Position& cell : block) {
-      try {
-         g_grid.grid[cell.row][cell.col] = this->p_id;
-      } catch(std::out_of_range& e) {
-         std::string error = "Row: " + std::to_string(cell.row) + "  Column: " + std::to_string(cell.col) + "   (ERROR)   ";
-         DrawText(error.c_str(), 100, 20, 40, WHITE);
-      }
-      
+      g_grid.grid[cell.row][cell.col] = this->p_id;
    }
 }
 
