@@ -3,7 +3,7 @@
 #include "Blocks.h"
 
 class Game {
-   std::vector<Block> blocks{};
+   std::vector<Block> blockBag{};
    Block currentBlock;
    Block nextBlock;
 
@@ -14,9 +14,6 @@ class Game {
    Block getRandomBlock();
    std::vector<Block> resetBlockBag();
    
-   void HandleEvents();
-   void Draw();
-   
    float timeSinceFall = 0.0f; // time elapsed in seconds since last fall
    
    /** parameters 
@@ -26,6 +23,9 @@ class Game {
    bool shouldFall(float dt, float fallInterval);
    
    bool isGameOver = false;
+   
+   void HandleEvents();
+   void Draw();
 public:
    Game() = default;
    void Init();

@@ -67,7 +67,7 @@ void Block::m_lockBlock() {
    std::array<Position, 4> block = m_getBlockPosition();
    
    for(Position& cell : block) {
-      g_grid.grid[cell.row][cell.col] = this->p_id;
+      g_grid.makePermanent(this->p_id, cell.row, cell.col);
    }
 }
 

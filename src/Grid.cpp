@@ -11,39 +11,39 @@
 #include <cstdio>
 #endif
 
-bool Grid::isRowFull(int row) {
-   for(const CellType& cell : grid.at(row)) {
+bool Grid::m_isRowFull(int row) {
+   for(const CellType& cell : m_grid.at(row)) {
       if(cell == CellType::Empty)
          return false;
    }
    return true;
 }
 
-void Grid::clearRow(int row) {
-   for(CellType& cell : grid.at(row)) {
+void Grid::m_clearRow(int row) {
+   for(CellType& cell : m_grid.at(row)) {
       cell = CellType::Empty;
    }
 }
 
-void Grid::moveRowDown(int row, int moveCount) {
+void Grid::m_moveRowDown(int row, int moveCount) {
    int finalRow = row + moveCount;
    if(finalRow < m_rows)
-      grid[finalRow] = grid.at(row);
-   clearRow(row);
+      m_grid[finalRow] = m_grid.at(row);
+   m_clearRow(row);
 }
 
 void Grid::Clean() {
    int fullRows = 0;
 
    for(int row = m_rows - 1; row > 0; row--) {
-      if(isRowFull(row)) {
-         clearRow(row);
+      if(m_isRowFull(row)) {
+         m_clearRow(row);
          #if _DEBUGGING
             printf("Clearing row %d\n", row);
          #endif
          fullRows++;
       } else if(fullRows > 0) {
-         moveRowDown(row, fullRows);
+         m_moveRowDown(row, fullRows);
          #if _DEBUGGING
             printf("Moving row %d down by %d\n", row-1, fullRows);
          #endif         
@@ -57,7 +57,7 @@ void Grid::Draw() {
          DrawRectangle(
             col * cellSize + 2, row * cellSize + 2, 
             cellSize - 2, cellSize - 2, 
-            cellColorMap[ grid.at(row).at(col) ]
+            cellColorMap[ m_grid.at(row).at(col) ]
          );
       }
    }

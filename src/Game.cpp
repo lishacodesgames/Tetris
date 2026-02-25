@@ -21,7 +21,7 @@ void Game::Init() {
    SetTargetFPS(45);
    srand(time(0));
 
-   blocks = resetBlockBag();
+   blockBag = resetBlockBag();
    currentBlock = getRandomBlock();
    nextBlock = getRandomBlock();
 }
@@ -96,12 +96,12 @@ bool Game::shouldFall(float dt, float fallInterval) {
 }
 
 Block Game::getRandomBlock() {
-   if(blocks.size() == 0)
-      blocks = resetBlockBag();
+   if(blockBag.size() == 0)
+      blockBag = resetBlockBag();
 
-   int randIndex = rand() % blocks.size();
-   Block randomBlock = blocks[randIndex];
-   blocks.erase(blocks.begin() + randIndex);
+   int randIndex = rand() % blockBag.size();
+   Block randomBlock = blockBag[randIndex];
+   blockBag.erase(blockBag.begin() + randIndex);
    return randomBlock;
 }
 

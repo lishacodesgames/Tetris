@@ -25,5 +25,4 @@ struct GridColorValues {
    Color Znake = {235, 87, 87, 255}; //Z -- rgb(235, 87, 87)
 };
 
-/// @brief cell-color map
-extern std::unordered_map<CellType, Color> cellColorMap;
+extern std::unordered_map<CellType, Color> cellColorMap; /// cell-color map

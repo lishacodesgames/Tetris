@@ -7,19 +7,24 @@
 class Grid {
    int m_rows = 20; /// grid height
    int m_columns = 10; /// grid width
+   std::array<std::array<CellType, 10>, 20> m_grid{};
 
-   bool isRowFull(int row);
-   void clearRow(int row);
+   bool m_isRowFull(int row);
+   void m_clearRow(int row);
 
-   /// @param row current row position (which row to move down)
-   /// @param moveCount how many rows to move down
-   void moveRowDown(int row, int moveCount);
+   /** parameters 
+    * @param row current row position (which row to move down)
+    * @param moveCount how many rows to move down
+    */
+   void m_moveRowDown(int row, int moveCount);
 public:
+   int cellSize = 30;
+   
    void Clean(); /// clears rows & handles empty ones
    void Draw();
-   
-   std::array<std::array<CellType, 10>, 20> grid{};
-   int cellSize = 30;
+
+   /// sets grid[row][col] to block
+   void makePermanent(CellType block, int row, int col);
 
    enum class OutOfBounds { Inside, Right, Bottom, Left , Top };
    OutOfBounds checkBounds(const Position& cell);
