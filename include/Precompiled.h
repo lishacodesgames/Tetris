@@ -12,6 +12,10 @@
 #include <random>
 #include <ctime>
 
+// ---- LOGGING ----
+#include <iostream>
+#include <cstdio> //cout is clunky and println doesnt work 
+
 // ---- OTHER ----
 #include <algorithm>
 #include <stdexcept>

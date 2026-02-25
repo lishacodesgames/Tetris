@@ -1,9 +1,12 @@
 #include <Precompiled.h>
 #include <raylib.h>
+#include <cstdio>
 #include <vector>
 #include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
+
+#define _DEBUGGING 0
 
 bool Grid::isRowFull(int row) {
    for(const CellType& cell : grid.at(row)) {
@@ -28,25 +31,20 @@ void Grid::moveRowDown(int row, int moveCount) {
 
 void Grid::Clean() {
    int fullRows = 0;
-   int firstRowCleared = -1;
 
-   // count full rows & clear them
-   for(int row = 1; row < m_rows; row++) {
+   for(int row = m_rows - 1; row > 0; row--) {
       if(isRowFull(row)) {
-         if(firstRowCleared == -1)
-            firstRowCleared = row;
          clearRow(row);
+         #if _DEBUGGING
+            printf("Clearing row %d\n", row);
+         #endif
          fullRows++;
+      } else if(fullRows > 0) {
+         moveRowDown(row, fullRows);
+         #if _DEBUGGING
+            printf("Moving row %d down by %d\n", row-1, fullRows);
+         #endif         
       }
-   }
-   if(fullRows == 0)
-      return;
-   if(firstRowCleared == 1 || firstRowCleared == 2)
-      return;
-
-   // iterate again to move them down according to fullRows
-   for(int row = 2; row < firstRowCleared; row++) { // starts from 18, ends at 2 (3rd)
-      moveRowDown(row, fullRows);
    }
 }
 
