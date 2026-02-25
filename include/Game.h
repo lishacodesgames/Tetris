@@ -23,6 +23,7 @@ class Game {
    bool shouldFall(float dt, float fallInterval);
    
    bool isGameOver = false;
+   void Reset();
    
    void HandleEvents();
    void Draw();

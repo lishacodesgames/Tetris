@@ -44,6 +44,7 @@ void Game::HandleEvents() {
    while(key != 0) { // processes all keys in queue, 0 = empty
       if(isGameOver) {
          isGameOver = false;
+         Reset();
       }
       switch(key) {
          case KEY_LEFT:
@@ -77,12 +78,21 @@ void Game::HandleEvents() {
    g_grid.Clean();
 }
 
+void Game::Reset() {
+   g_grid.Reset();
+   blockBag = resetBlockBag();
+   currentBlock = getRandomBlock();
+   nextBlock = getRandomBlock();
+}
+
 void Game::Draw() {
    g_grid.Draw();
    currentBlock.Draw();
 
-   if(isGameOver)
-      DrawText("Game Over!", 45, GetScreenHeight() / 2 - 20, 40, GameOverText);
+   if(isGameOver) {
+      DrawText("Game Over!", 45, GetScreenHeight()/2 - 20, 40, COLOR_GAMEOVER);
+      DrawText("Press any key to restart...", 15, GetScreenHeight()/2 + 20, 20, COLOR_GAMEOVER);
+   }
 }
 
 bool Game::shouldFall(float dt, float fallInterval) {

@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <unordered_map>
 
-inline Color GameOverText = {93, 169, 233, 255}; // skyblue
+extern Color COLOR_GAMEOVER;
 
 enum class CellType {
    Empty,

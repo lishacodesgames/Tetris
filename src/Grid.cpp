@@ -63,6 +63,18 @@ void Grid::Draw() {
    }
 }
 
+void Grid::Reset() {
+   for(auto& row : m_grid) {
+      for(CellType& cell : row) {
+         cell = CellType::Empty;
+      }
+   }
+}
+
+void Grid::makePermanent(CellType block, int row, int col) {
+   this->m_grid[row][col] = block;
+}
+
 Grid::OutOfBounds Grid::checkBounds(const Position& cell) {
    if(cell.col >= m_columns)
       return OutOfBounds::Right;
@@ -78,7 +90,7 @@ bool Grid::isCellEmpty(const Position& cell) {
    if(cell.row == -1)
       return true;
 
-   if(grid.at(cell.row).at(cell.col) == CellType::Empty)
+   if(m_grid.at(cell.row).at(cell.col) == CellType::Empty)
       return true;
    else return false;
 }

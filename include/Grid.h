@@ -23,6 +23,8 @@ public:
    void Clean(); /// clears rows & handles empty ones
    void Draw();
 
+   void Reset(); /// resets grid to CellType::Empty
+
    /// sets grid[row][col] to block
    void makePermanent(CellType block, int row, int col);
 
