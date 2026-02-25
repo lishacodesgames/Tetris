@@ -28,7 +28,7 @@ void Block::Move(Position offset) {
    p_positionOffset += offset;
 
    Grid::OutOfBounds bounds = m_considerBounds();
-   if(bounds != Grid::OutOfBounds::Inside || m_isColliding()) {
+   if(bounds != Grid::OutOfBounds::Inside || isColliding()) {
       p_positionOffset -= offset;
       if(offset == Position{1, 0})
          m_lockBlock();
@@ -45,7 +45,7 @@ void Block::Rotate() {
       p_positionOffset += {0, 1}; // allows rotation while keeping within bounds
    else if(bounds == Grid::OutOfBounds::Right)
       p_positionOffset -= {0, 1};
-   else if(bounds != Grid::OutOfBounds::Inside || m_isColliding())
+   else if(bounds != Grid::OutOfBounds::Inside || isColliding())
       --m_rotation;
    else return; // rotation successfull
 }
@@ -56,8 +56,8 @@ void Block::Draw() {
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);
       DrawRectangle(
-         cell.col * g_grid.cellSize + 1, cell.row * g_grid.cellSize + 1,
-         g_grid.cellSize - 1, g_grid.cellSize - 1, cellColorMap[p_id]
+         cell.col * g_grid.cellSize + 2, cell.row * g_grid.cellSize + 2,
+         g_grid.cellSize - 2, g_grid.cellSize - 2, cellColorMap[p_id]
       );
    }
 }
@@ -91,7 +91,7 @@ Grid::OutOfBounds Block::m_considerBounds() {
    return Grid::OutOfBounds::Inside; // no cells were out of bounds
 }
 
-bool Block::m_isColliding() {
+bool Block::isColliding() {
    for(const Position& cell : m_getBlockPosition()) {
       if(!g_grid.isCellEmpty(cell))
          return true;

@@ -19,11 +19,13 @@ class Game {
    
    float timeSinceFall = 0.0f; // time elapsed in seconds since last fall
    
-   /**
+   /** parameters 
     * @param dt Time since last frame (explicitly needed bcz lag)
     * @param fallInterval Time between each fall
     */
    bool shouldFall(float dt, float fallInterval);
+   
+   bool isGameOver = false;
 public:
    Game() = default;
    void Init();

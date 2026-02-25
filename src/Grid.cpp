@@ -1,12 +1,15 @@
 #include <Precompiled.h>
 #include <raylib.h>
-#include <cstdio>
 #include <vector>
 #include "Grid.h"
 #include "Colors.h"
 #include "Position.h"
 
 #define _DEBUGGING 0
+
+#if _DEBUGGING
+#include <cstdio>
+#endif
 
 bool Grid::isRowFull(int row) {
    for(const CellType& cell : grid.at(row)) {
@@ -52,8 +55,8 @@ void Grid::Draw() {
    for (int row = 0; row < m_rows; row++) {
       for (int col = 0; col < m_columns; col++) {
          DrawRectangle(
-            col * cellSize + 1, row * cellSize + 1, 
-            cellSize - 1, cellSize - 1, 
+            col * cellSize + 2, row * cellSize + 2, 
+            cellSize - 2, cellSize - 2, 
             cellColorMap[ grid.at(row).at(col) ]
          );
       }

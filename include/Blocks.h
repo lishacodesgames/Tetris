@@ -9,12 +9,14 @@ class Block {
 protected: 
 // -------------- PROTECTED --------------
 
-   /** block's coordinates
+   /** @brief block's coordinates
     * @details each block has its own nxn grid. 
     * This attributes tells us the positionOffset of the top-left corner of that grid
     * Basically just the position of the block
+    * @example initial value {0, 3}
+    * @note initial position overwritten by some child classes
     */
-   Position p_positionOffset = {0, 3}; // overwritten by some child classes 
+   Position p_positionOffset = {0, 3}; 
    CellType p_id = CellType::Empty; /// type of block
    
 public:
@@ -29,6 +31,7 @@ public:
    std::unordered_map<RotationState, std::array<Position, 4>> cells{};
 
    bool isLocked = false; /// if block is at the bottom
+   bool isColliding();
 
    void Fall();
    void Move(Position offset);
@@ -36,6 +39,7 @@ public:
    void Draw();
 
 private:
+// -------------- PRIVATE --------------
    RotationState m_rotation = RotationState::Zero;
 
    /// Makes the block's cells permanent in the grid
@@ -44,7 +48,6 @@ private:
    /// Origin + offset = current position
    std::array<Position, 4> m_getBlockPosition();
    Grid::OutOfBounds m_considerBounds();
-   bool m_isColliding();
 };
 
 // -------------- CHILDREN BLOCKS --------------
@@ -104,4 +107,3 @@ class Znake : public Block {
 public:
    Znake();
 };
-

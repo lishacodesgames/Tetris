@@ -10,9 +10,15 @@
 #include "Grid.h"
 #include "Position.h"
 
+#define _DEBUGGING 0
+
+#if _DEBUGGING
+#include <cstdio>
+#endif
+
 void Game::Init() {
    InitWindow(300, 600, "Tetris");
-   SetTargetFPS(30);
+   SetTargetFPS(45);
    srand(time(0));
 
    blocks = resetBlockBag();
@@ -23,7 +29,7 @@ void Game::Init() {
 void Game::Run() {
    while(!WindowShouldClose()) {
       HandleEvents();
-
+      
       BeginDrawing();
       ClearBackground(ColorBrightness(cellColorMap[CellType::Empty], 0.04f)); // color of the gridlines
       Draw();
@@ -36,6 +42,9 @@ void Game::Run() {
 void Game::HandleEvents() {
    int key = GetKeyPressed();
    while(key != 0) { // processes all keys in queue, 0 = empty
+      if(isGameOver) {
+         isGameOver = false;
+      }
       switch(key) {
          case KEY_LEFT:
             currentBlock.Move({0, -1});
@@ -58,6 +67,10 @@ void Game::HandleEvents() {
 
    if(currentBlock.isLocked) {
       currentBlock = nextBlock;
+      if(currentBlock.isColliding()) {
+         isGameOver = true;
+         return;
+      }
       nextBlock = getRandomBlock();
    }
 
@@ -67,6 +80,9 @@ void Game::HandleEvents() {
 void Game::Draw() {
    g_grid.Draw();
    currentBlock.Draw();
+
+   if(isGameOver)
+      DrawText("Game Over!", 45, GetScreenHeight() / 2 - 20, 40, GameOverText);
 }
 
 bool Game::shouldFall(float dt, float fallInterval) {
@@ -89,4 +105,6 @@ Block Game::getRandomBlock() {
    return randomBlock;
 }
 
-std::vector<Block> Game::resetBlockBag() { return {Hero(), Teewee(), Smashboy(), Ricky(), AutRicky(), Snake(), Znake()}; }
+std::vector<Block> Game::resetBlockBag() { 
+   return {Hero(), Teewee(), Smashboy(), Ricky(), AutRicky(), Snake(), Znake()}; 
+}
