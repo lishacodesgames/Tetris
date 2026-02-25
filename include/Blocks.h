@@ -28,7 +28,7 @@ public:
    /// Tetromino's 4 cells -> occupy which 4 positions 
    std::unordered_map<RotationState, std::array<Position, 4>> cells{};
 
-   bool isLocked = false; // if block is at the bottom
+   bool isLocked = false; /// if block is at the bottom
 
    void Fall();
    void Move(Position offset);
