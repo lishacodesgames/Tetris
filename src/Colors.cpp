@@ -3,7 +3,7 @@
 #include <raylib.h>
 #include "Colors.h"
 
-Color COLOR_GAMEOVER = {210, 255, 40, 255}; // hotpink
+Color COLOR_GAMEOVER = {240, 255, 160, 255};
 
 static GridColorValues colorValue;
 std::unordered_map<CellType, Color> cellColorMap = {

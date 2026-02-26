@@ -17,8 +17,8 @@
 #endif
 
 void Game::Init() {
-   InitWindow(300, 600, "Tetris");
-   SetTargetFPS(45);
+   InitWindow(500, 700, "Tetris");
+   SetTargetFPS(40);
    srand(time(0));
 
    blockBag = resetBlockBag();
@@ -90,8 +90,8 @@ void Game::Draw() {
    currentBlock.Draw();
 
    if(isGameOver) {
-      DrawText("Game Over!", 45, GetScreenHeight()/2 - 20, 40, COLOR_GAMEOVER);
-      DrawText("Press any key to restart...", 15, GetScreenHeight()/2 + 20, 20, COLOR_GAMEOVER);
+      DrawText("Game Over!", 45, GetScreenHeight()/2 - 20, 48, COLOR_GAMEOVER);
+      DrawText("Press any key to restart...", 15, GetScreenHeight()/2 + 20, 25, COLOR_GAMEOVER);
    }
 }
 

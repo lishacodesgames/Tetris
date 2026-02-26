@@ -55,12 +55,14 @@ void Grid::Draw() {
    for (int row = 0; row < m_rows; row++) {
       for (int col = 0; col < m_columns; col++) {
          DrawRectangle(
-            col * cellSize + 2, row * cellSize + 2, 
-            cellSize - 2, cellSize - 2, 
+            col * cellSize + 3, row * cellSize + 3, 
+            cellSize - 3, cellSize - 3, 
             cellColorMap[ m_grid.at(row).at(col) ]
          );
       }
    }
+   Rectangle grid = {1.25f, 1.25f, (float)(cellSize * m_columns) - 1.25f, (float)(cellSize * m_rows) - 1.25f};
+   DrawRectangleLinesEx(grid, 1.5f, Color{234, 163, 163, 255}); // rgb(234, 163, 163)
 }
 
 void Grid::Reset() {

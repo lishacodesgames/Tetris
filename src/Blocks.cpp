@@ -56,8 +56,8 @@ void Block::Draw() {
    for(int i = 0; i < 4; i++) {
       Position& cell = block.at(i);
       DrawRectangle(
-         cell.col * g_grid.cellSize + 2, cell.row * g_grid.cellSize + 2,
-         g_grid.cellSize - 2, g_grid.cellSize - 2, cellColorMap[p_id]
+         cell.col * g_grid.cellSize + 3, cell.row * g_grid.cellSize + 3,
+         g_grid.cellSize - 3, g_grid.cellSize - 3, cellColorMap[p_id]
       );
    }
 }

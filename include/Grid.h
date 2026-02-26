@@ -18,7 +18,7 @@ class Grid {
     */
    void m_moveRowDown(int row, int moveCount);
 public:
-   int cellSize = 30;
+   int cellSize = 35;
    
    void Clean(); /// clears rows & handles empty ones
    void Draw();

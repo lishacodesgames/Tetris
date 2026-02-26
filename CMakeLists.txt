@@ -17,14 +17,8 @@ add_executable(${PROJECT_NAME}
    src/Grid.cpp
    src/main.cpp
 )
-target_sources(${PROJECT_NAME} PRIVATE tetris256.rc) # tetris.exe icon
-
-if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang") # won't work for MSVC
-   target_compile_options(${PROJECT_NAME} PRIVATE
-      -Wall
-      -Wextra
-      -Wpedantic
-   )
+if(WIN32)
+   target_sources(${PROJECT_NAME} PRIVATE tetris256.rc) # tetris.exe icon
 endif()
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
@@ -35,5 +29,12 @@ add_library(header_only_libs INTERFACE
    include/Position.h
 )
 target_include_directories(${PROJECT_NAME} PRIVATE include )
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib header_only_libs)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib )
+if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang") # won't work for MSVC
+   target_compile_options(${PROJECT_NAME} PRIVATE
+      -Wall
+      -Wextra
+      -Wpedantic
+   )
+endif()

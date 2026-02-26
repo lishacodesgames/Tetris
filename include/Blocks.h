@@ -10,11 +10,11 @@ protected:
 // -------------- PROTECTED --------------
 
    /** @brief block's coordinates
+    * @note initial value = {0, 3} [overwritten by some child classes]
+    * 
     * @details each block has its own nxn grid. 
     * This attributes tells us the positionOffset of the top-left corner of that grid
     * Basically just the position of the block
-    * @example initial value {0, 3}
-    * @note initial position overwritten by some child classes
     */
    Position p_positionOffset = {0, 3}; 
    CellType p_id = CellType::Empty; /// type of block
