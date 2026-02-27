@@ -17,7 +17,10 @@ It has Raylib as a submodule, thus there are no external dependencies. <br>
 
 I had a lot of fun messing around with the code and the architecture! <br>
 
-<br><br><br><br>
+There is also an executable attached with the latest Release, if you want to test the game out :) <br>
+Do let me know of your feedback if you do <br>
+
+<br>
 
 ## Running cmake build
 * Presets: Debug for details, Release for efficiency
