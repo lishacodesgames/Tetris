@@ -7,8 +7,8 @@
 ![RayLib](https://img.shields.io/badge/RAYLIB-FFFFFF?style=for-the-badge&logo=raylib&logoColor=black)
 
 ## Overview
-<img align="left" height="300" alt="MY TETRIS GAME" src="https://github.com/user-attachments/assets/8be9610a-1a4c-456a-b223-87118b9de09b" />
-<img align="right" height="300" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/41d288c3-b5fb-4147-b298-f2699a69014f" />
+<img align="left" height="250" alt="MY TETRIS GAME" src="https://github.com/user-attachments/assets/8be9610a-1a4c-456a-b223-87118b9de09b" />
+<img align="right" height="250" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/41d288c3-b5fb-4147-b298-f2699a69014f" />
 
 This is a simple, minimal game of Tetris implemented in Raylib, C++ with OOP. <br>
 
