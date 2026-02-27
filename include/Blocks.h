@@ -37,7 +37,7 @@ public:
    void Move(Position offset);
    void Rotate(); /// Rotations block clockwise
    void Draw();
-
+   void drawNext();
 private:
 // -------------- PRIVATE --------------
    RotationState m_rotation = RotationState::Zero;

@@ -62,6 +62,26 @@ void Block::Draw() {
    }
 }
 
+void Block::drawNext() {
+   float offsetX, offsetY, cellSize;
+   for(Position& cell : cells.at(RotationState::Zero)) {
+      offsetX = cell.col * g_grid.cellSize + 405;
+      offsetY = cell.row * g_grid.cellSize + 435;
+      cellSize = g_grid.cellSize - 4;
+
+      if(p_id == CellType::Hero) {
+         // I block 
+         offsetY -= 15;
+         offsetX -= 21;
+      } else if(p_id == CellType::Smashboy) {
+         // 2x2
+         offsetX += 15;
+      }
+      
+      DrawRectangle(offsetX, offsetY, cellSize, cellSize, cellColorMap[p_id]);
+   }
+}
+
 void Block::m_lockBlock() {
    isLocked = true;
    std::array<Position, 4> block = m_getBlockPosition();

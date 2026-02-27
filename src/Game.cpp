@@ -109,6 +109,14 @@ void Game::Draw() {
       60, WHITE
    );
 
+   // next block
+   Vector2 nextPos = {370, 360};
+   DrawText("Next block", nextPos.x, nextPos.y, 30, WHITE);
+
+   Rectangle nextBox = {nextPos.x - 12, nextPos.y + 35, 185, 150};
+   DrawRectangleRounded(nextBox, 0.5f, 6, Color{108, 189, 229, 40});
+   nextBlock.drawNext();
+
    // game over
    if(isGameOver) {
       DrawText("Game Over!", 43, GetScreenHeight()/2 - 22, 48, BLACK); // outline
