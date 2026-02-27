@@ -32,7 +32,7 @@ void Grid::m_moveRowDown(int row, int moveCount) {
    m_clearRow(row);
 }
 
-void Grid::Clean() {
+int Grid::Clean() {
    int fullRows = 0;
 
    for(int row = m_rows - 1; row > 0; row--) {
@@ -49,6 +49,8 @@ void Grid::Clean() {
          #endif         
       }
    }
+
+   return fullRows;
 }
 
 void Grid::Draw() {

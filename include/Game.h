@@ -1,8 +1,11 @@
 #pragma once
 #include <vector>
 #include "Blocks.h"
+#include "Colors.h"
 
 class Game {
+   Color background;
+
    std::vector<Block> blockBag{};
    Block currentBlock;
    Block nextBlock;
@@ -22,6 +25,8 @@ class Game {
     */
    bool shouldFall(float dt, float fallInterval);
    
+   int score = 0;
+
    bool isGameOver = false;
    void Reset();
    

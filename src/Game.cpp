@@ -17,9 +17,11 @@
 #endif
 
 void Game::Init() {
-   InitWindow(500, 700, "Tetris");
+   InitWindow(550, 700, "Tetris");
    SetTargetFPS(40);
    srand(time(0));
+
+   background = ColorBrightness(cellColorMap[CellType::Empty], 0.04f);
 
    blockBag = resetBlockBag();
    currentBlock = getRandomBlock();
@@ -31,7 +33,7 @@ void Game::Run() {
       HandleEvents();
       
       BeginDrawing();
-      ClearBackground(ColorBrightness(cellColorMap[CellType::Empty], 0.04f)); // color of the gridlines
+      ClearBackground(background);
       Draw();
       EndDrawing();
    }
@@ -75,7 +77,7 @@ void Game::HandleEvents() {
       nextBlock = getRandomBlock();
    }
 
-   g_grid.Clean();
+   score += g_grid.Clean();
 }
 
 void Game::Reset() {
@@ -83,14 +85,36 @@ void Game::Reset() {
    blockBag = resetBlockBag();
    currentBlock = getRandomBlock();
    nextBlock = getRandomBlock();
+   score = 0;
 }
 
 void Game::Draw() {
+   // game
    g_grid.Draw();
    currentBlock.Draw();
 
+   // score
+   Vector2 scorePos = {377, 80};
+   DrawText("Score", scorePos.x, scorePos.y, 45, WHITE);
+
+   Rectangle scoreBox = {scorePos.x - 15, scorePos.y + 50, 180, 110};
+   DrawRectangleRounded(scoreBox, 0.5f, 6, Color{108, 189, 229, 40});
+
+   DrawText(
+      TextFormat("%d", score), 
+      score == 1 ? scoreBox.x + 85 : 
+         score < 10 ? scoreBox.x + 75 : 
+         score < 25 ? scoreBox.x + 70 : scoreBox.x + 60,
+      scoreBox.y + 28, 
+      60, WHITE
+   );
+
+   // game over
    if(isGameOver) {
-      DrawText("Game Over!", 45, GetScreenHeight()/2 - 20, 48, COLOR_GAMEOVER);
+      DrawText("Game Over!", 43, GetScreenHeight()/2 - 22, 48, BLACK); // outline
+      DrawText("Game Over!", 40, GetScreenHeight()/2 - 25, 48, COLOR_GAMEOVER);
+
+      DrawText("Press any key to restart...", 17, GetScreenHeight()/2 + 22, 25, BLACK); // outline
       DrawText("Press any key to restart...", 15, GetScreenHeight()/2 + 20, 25, COLOR_GAMEOVER);
    }
 }

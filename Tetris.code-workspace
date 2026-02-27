@@ -14,11 +14,11 @@
 		"chat.commandCenter.enabled": false,
 		"chat.notifyWindowOnConfirmation": false,
 		"github.copilot.enable": {
-			"*": true,
+			"*": false,
 			"plaintext": false,
 			"markdown": false,
 			"scminput": false,
-			"cpp": false,
+			"cpp": true
 		},
 		
 		// debug

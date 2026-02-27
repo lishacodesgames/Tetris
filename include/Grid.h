@@ -20,7 +20,10 @@ class Grid {
 public:
    int cellSize = 35;
    
-   void Clean(); /// clears rows & handles empty ones
+   /** clears rows & handles empty ones
+    * @return number of rows cleared
+   */
+   int Clean();
    void Draw();
 
    void Reset(); /// resets grid to CellType::Empty
