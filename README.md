@@ -7,16 +7,15 @@
 ![RayLib](https://img.shields.io/badge/RAYLIB-FFFFFF?style=for-the-badge&logo=raylib&logoColor=black)
 
 ## Overview
-<img align="left" height="250" alt="MY TETRIS GAME" src="https://github.com/user-attachments/assets/8be9610a-1a4c-456a-b223-87118b9de09b" />
-<img align="right" height="250" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/41d288c3-b5fb-4147-b298-f2699a69014f" />
+<img align="left" height="350" alt="MY TETRIS GAME" src="https://github.com/user-attachments/assets/8be9610a-1a4c-456a-b223-87118b9de09b" />
+<img align="right" height="350" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/41d288c3-b5fb-4147-b298-f2699a69014f" />
 
 This is a simple, minimal game of Tetris implemented in Raylib, C++ with OOP. <br>
 
 I made this game to practice Raylib with the crutches of a tutorial, but while trying to do as much as I can myself. <br>
 It has Raylib as a submodule, thus there are no external dependencies. <br>
-
+<br>
 I had a lot of fun messing around with the code and the architecture! <br>
-
 There is also an executable attached with the latest Release, if you want to test the game out :) <br>
 Do let me know of your feedback if you do <br>
 
