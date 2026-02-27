@@ -1,15 +1,23 @@
 # Tetris in Raylib, C++
 ![Latest Tag](https://img.shields.io/github/v/tag/lishacodesgames/Tetris?color=%237DBA84)
-![Status Badge](https://img.shields.io/badge/Status-In_Development-yellow)
-
-## Overview
-This is a simple, minimal game of Tetris implemented in Raylib, C++ with OOP. <br>
-I made this game to practice Raylib with the crutches of a tutorial, but while trying to do as much as I can myself. <br>
-It has Raylib as a submodule, thus there are no external dependencies. <br>
+![Status Badge](https://img.shields.io/badge/Status-Complete-green) <br>
 
 ## Tech Stack
 ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 ![RayLib](https://img.shields.io/badge/RAYLIB-FFFFFF?style=for-the-badge&logo=raylib&logoColor=black)
+
+## Overview
+<img align="left" height="300" alt="MY TETRIS GAME" src="https://github.com/user-attachments/assets/8be9610a-1a4c-456a-b223-87118b9de09b" />
+<img align="right" height="300" alt="Screenshot (22)" src="https://github.com/user-attachments/assets/41d288c3-b5fb-4147-b298-f2699a69014f" />
+
+This is a simple, minimal game of Tetris implemented in Raylib, C++ with OOP. <br>
+
+I made this game to practice Raylib with the crutches of a tutorial, but while trying to do as much as I can myself. <br>
+It has Raylib as a submodule, thus there are no external dependencies. <br>
+
+I had a lot of fun messing around with the code and the architecture! <br>
+
+<br><br><br><br>
 
 ## Running cmake build
 * Presets: Debug for details, Release for efficiency
